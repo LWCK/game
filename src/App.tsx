@@ -1,6 +1,7 @@
 import './App.css'
 import { Button, Col, Container, Image, Row } from 'react-bootstrap'
 import React, { useEffect } from 'react'
+import parse from 'html-react-parser';
 
 const App = () => {
 
@@ -23,13 +24,14 @@ const App = () => {
 	}, []
 	)
 
-	// console.log(gameList);
-	console.log(rule && rule.data.attributes.text);
+	console.log(gameList && gameList.data[1].attributes.game.data[0].attributes.url);
+	// console.log(rule && rule.data.attributes.text);
 
 	const [step1, setStep1] = React.useState<boolean>(true)
 	const [step2, setStep2] = React.useState<boolean>(false)
-	const [step21, setStep21] = React.useState<boolean>(false)
+	const [stepRule, setStepRule] = React.useState<boolean>(false)
 	const [step3, setStep3] = React.useState<boolean>(false)
+	const [stepGameStory, setStepGameStory] = React.useState<boolean>(false)
 
 	const startGame = () => {
 		setStep1(false)
@@ -37,19 +39,22 @@ const App = () => {
 	}
 
 	const showIntro = () => {
-		setStep21(true)
+		setStepRule(true)
 		setStep2(false)
 	}
-
 
 	const imgGame = () => {
 		setStep2(false)
-		setStep21(false)
-		setStep3(true)
+		setStepRule(false)
+		setStepGameStory(true)
 	}
 
-	console.log(gameList.intro);
-
+	const gameLauncher = () => {
+		setStep3(true)
+		setStep2(false)
+		setStepRule(false)
+		setStepGameStory(false)
+	}
 
 	return (
 		<>
@@ -75,7 +80,7 @@ const App = () => {
 								Le trésor du legéndaire <br />
 								pirate la buse
 							</h2>
-							<Button onClick={() => startGame()} variant='' className="btn text">Commencer</Button>
+							<Button onClick={() => startGame()} variant='' className="btn text">Commencer le jeu</Button>
 						</Col>
 					</Row>
 				</Container>
@@ -87,51 +92,50 @@ const App = () => {
 						<Row>
 							<Image className='char-img-2' src="/src/assets/images/char2.png" alt="" />
 							<div className='text-center char-text bg title'>
-
-
 								<h2>Salut moussaillon !!</h2>
 								<Button onClick={() => showIntro()} variant='' className='text-end'>
 									Rappel des règles
 								</Button>
-								{/* <Button onClick={() => imgGame()} variant='' className='text-end'>
+								<Button onClick={() => imgGame()} variant='' className='text-end'>
 									jeu
-								</Button> */}
-
+								</Button>
 							</div>
 						</Row>
 					</Container>
 				</>
 			}
-
-			{step21 &&
+			{stepRule &&
 				<>
-
-					<Container fluid className='vh-100 main only-portrait bg'>
+					<Container fluid className='main2 only-portrait bg'>
 						<Row className="p-3">
-							<Col xs={12} className='text text-center'>
-								<p className='text-justify text'>
-									{rule && rule.data.attributes.text}
-								</p>
-								<Button onClick={() => imgGame()} variant='' className="btn text">Commencer
-
-									{/* //step */}
-
+							<Col xs={12} className='text text-justify text'>
+								{rule && parse(rule && rule.data.attributes.text)}
+								<Button onClick={() => imgGame()} variant='' className="btn text">Commencer l'histoire
 								</Button>
 							</Col>
 						</Row>
 					</Container>
-
 				</>
 			}
-
+			{stepGameStory &&
+				<Container fluid className='main2 only-portrait bg'>
+					<Row className="p-3">
+						<Col xs={12} className='text text-justify text'>
+							{gameList && parse(gameList.data[1].attributes.content)}
+							<Button onClick={() => gameLauncher()} variant='' className="btn text">Commencer l'énigme
+							</Button>
+						</Col>
+					</Row>
+				</Container>
+			}
 			{
 				step3 &&
 				<Container className='only-portrait main bg'>
 					<Row>
 						<Col className='text-center'>
 							<h2>Règles du Jeu</h2>
-							<p>{gameList.rules}</p>
-							<Image className='game-img' src='/src/assets/images/game1.png' />
+							{gameList && parse(gameList.data[1].attributes.rules_games)}
+							<Image className='game-img' src={'http://192.168.1.250:1337' + gameList.data[1].attributes.game.data[0].attributes.url} />
 						</Col>
 					</Row>
 				</Container>

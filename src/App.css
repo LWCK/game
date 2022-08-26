@@ -34,10 +34,15 @@ body {
   align-content: center;
   height: 100vh;
 }
+.main2 {
+  justify-content: center;
+  align-content: flex-start;
+}
 
 .bg {
   background-image: url("./assets/images/text-bg.jpg");
-  background-size: 100% 100%;
+  background-size: cover;
+  background-attachment: fixed;
   background-position: center;
   box-shadow: 2px 2px 8px black;
 }
