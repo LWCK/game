@@ -183,3 +183,7 @@ h2 {
   bottom: 5px;
   right: 15px;
 }
+
+.step-btn {
+  background-color: aqua !important;
+}
