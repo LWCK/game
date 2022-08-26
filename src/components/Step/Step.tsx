@@ -95,10 +95,10 @@ const Step: React.FC = () => {
                             <Image className='char-img-2' src="/src/assets/images/char2.png" alt="" />
                             <div className='text-center char-text bg title'>
                                 <h2>Salut moussaillon !!</h2>
-                                <Button onClick={() => showIntro()} variant='' className='text-end'>
+                                <Button onClick={() => showIntro()} variant='' className='text-center mx-2 step-btn'>
                                     Rappel des règles
                                 </Button>
-                                <Button onClick={() => imgGame()} variant='' className='text-end'>
+                                <Button onClick={() => imgGame()} variant='' className='text-center mx-2 step-btn'>
                                     jeu
                                 </Button>
                             </div>
