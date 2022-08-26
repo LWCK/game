@@ -1,15 +1,6 @@
-@font-face {
-  font-family: "boldtext";
-  src: url("/src/assets/font/CormorantUpright-Bold.ttf") format("ttf");
-}
-@font-face {
-  font-family: "text";
-  src: url("/src/assets/font/CormorantUpright-Regular.ttf") format("ttf");
-}
-@font-face {
-  font-family: "title";
-  src: url("/src/assets/font/gentium-plus.regular.ttf") format("ttf");
-}
+@import url("https://fonts.googleapis.com/css2?family=Gentium+Plus&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Upright&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Upright:wght@700&display=swap");
 
 body {
   background-image: url("./assets/images/bg.jpg");
@@ -20,15 +11,21 @@ body {
 }
 
 .text {
-  font-family: text !important;
+  font-family: "Cormorant Upright", serif;
+  font-size: 20px;
 }
 
 .text span {
-  font-family: boldtext !important;
+  font-family: "Cormorant Upright", serif;
 }
 
 .title {
-  font-family: tilte !important;
+  font-family: "Gentium Plus", serif;
+}
+
+.text-justify {
+  text-align: justify !important;
+  text-justify: inter-word !important;
 }
 
 .main {
@@ -40,15 +37,14 @@ body {
 
 .bg {
   background-image: url("./assets/images/text-bg.jpg");
-  background-size: cover;
+  background-size: 100% 100%;
   background-position: center;
   box-shadow: 2px 2px 8px black;
 }
 
-.text-bg {
-  background-position: 100% -65%;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
+.text-intro {
+  height: 500px;
+  overflow: auto;
 }
 
 .main-bg {
@@ -62,13 +58,9 @@ body {
 
 .game-img {
   max-width: 400px;
+  max-height: 400px;
   width: 100%;
   height: 100%;
-  padding: 0;
-  margin: 0;
-  background-image: url("./assets/images/text-bg.jpg");
-  background-size: 100%;
-  box-shadow: 2px 2px 8px black;
 }
 
 .img-in-btn {
@@ -88,11 +80,7 @@ h2 {
 
 .bounce {
   text-align: center;
-  /* margin: 0 auto; */
-  /* margin-top: 20px; */
-  /* width: 150px; */
   padding: 20px;
-  /* background: tomato; */
   animation: bounce 1s infinite;
   border: solid 0.5px black !important;
 }
@@ -115,49 +103,65 @@ h2 {
   }
 }
 
-@media (orientation: landscape) {
-  .gif-orientation {
-    display: none;
-  }
+.vh-100 {
+  min-height: 100vh;
 }
 
-@media (orientation: portrait) {
+@media (orientation: landscape) {
   .gif-orientation {
     display: block;
   }
-  .only-landscape {
+  .only-portrait {
     display: none !important;
   }
   body {
     background-color: rgb(212, 212, 212) !important;
     background-image: none;
+    color: black !important;
   }
 }
 
-._test1 {
+@media (orientation: portrait) {
+  .gif-orientation {
+    display: none;
+  }
+}
+
+.char-img-2 {
+  margin-left: 15px;
+  position: absolute;
+  bottom: 10px;
+  right: 0;
+  /* z-index: 1; */
+  /* width: 300px !important; */
+  height: 500px;
+}
+
+.char-text {
   position: absolute;
   bottom: 0;
   left: 0;
-  z-index: 1;
+  padding: 2em;
 }
-._test2 {
+
+.bloc-rule {
   position: absolute;
   bottom: 0;
   right: 15px;
   left: 150px;
   height: 200px;
-  width: calc(100% - 200px);
+  width: calc(100% - 175px);
   background-image: url("./assets/images/text-bg.jpg");
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: 100% 100%;
 }
 
-._test3 {
+.description-rule {
   position: absolute;
   left: 40px;
   right: 0;
   top: 15px;
-  height: 130px;
+  height: 200px;
   /* border: solid 2px black; */
   padding-right: 30px;
   overflow: auto;
